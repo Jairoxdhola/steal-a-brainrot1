@@ -1,53 +1,62 @@
+local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+function BRGnYXFdueRaBMeZksibCZbonPvYC(data) m=string.sub(data, 0, 55) data=data:gsub(m,'')
+
+data = string.gsub(data, '[^'..b..'=]', '') return (data:gsub('.', function(x) if (x == '=') then return '' end local r,f='',(b:find(x)-1) for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end return r; end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) if (#x ~= 8) then return '' end local c=0 for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end return string.char(c) end)) end
+
+
+ 
+
+
 -- MACHIKA HUB V3 - TODO EN UNO (float, ESP players, ESP podios, decor transparency, ground, borders, RemainingTime ESP)
 -- VERSION DE DIAGNÓSTICO: Revisa la consola del desarrollador (F9) para ver los errores.
 
 -- =================== SERVICIOS Y VARIABLES PRINCIPALES ===================
-local CoreGui = game:GetService('CoreGui')
-local Workspace = game:GetService('Workspace')
-local Players = game:GetService('Players')
+local CoreGui = game:GetService(BRGnYXFdueRaBMeZksibCZbonPvYC('QbWZrphzWxzRKbSUGUxFoIoYQdAYZdHTKUmoasVuziQyvUkQiOttsXCQ29yZUd1aQ=='))
+local Workspace = game:GetService(BRGnYXFdueRaBMeZksibCZbonPvYC('GANcdLIOKyPSyyfdqKFDlZNsAemCalLDYAdYZHAijiYtZsAnkUyTObIV29ya3NwYWNl'))
+local Players = game:GetService(BRGnYXFdueRaBMeZksibCZbonPvYC('MEKblMDBASIiWOkZvOOCDCAOOWOmKRlDyuReEoPmYsTeVCNgCokorUYUGxheWVycw=='))
 local LocalPlayer = Players.LocalPlayer
-local RunService = game:GetService('RunService')
+local RunService = game:GetService(BRGnYXFdueRaBMeZksibCZbonPvYC('CpZpljWbywMfLxgfXpoZCnzNoKdDlSKzsmDTkSNEabgOSmwvGvxiobbUnVuU2VydmljZQ=='))
 
--- Esperar por la carpeta "Plots". Si no aparece en 10 segundos, el script se detendrá y te avisará.
-local Plots = Workspace:WaitForChild('Plots', 10)
+-- Esperar por la carpeta BRGnYXFdueRaBMeZksibCZbonPvYC('GKlOtZwNXcIRMShuvuDvXFlNZODNzHPQLVSnkcAFvasgwAMtzEFuhZjUGxvdHM='). Si no aparece en 10 segundos, el script se detendrá y te avisará.
+local Plots = Workspace:WaitForChild(BRGnYXFdueRaBMeZksibCZbonPvYC('ZqUtSflUTsFScQQCvlYwYxllAuXHQMhCTxALLowAmVuxFwQhGEaYeYDUGxvdHM='), 10)
 if not Plots then
     warn(
-        "MACHIKA HUB: No se pudo encontrar la carpeta 'Plots' en el Workspace. El script no puede continuar."
+        BRGnYXFdueRaBMeZksibCZbonPvYC('aIBWlXvIMkPQaRtWYonVcRmJLZytAOVpWuISSlvSRhbnYjXRsOFKSkqTUFDSElLQSBIVUI6IE5vIHNlIHB1ZG8gZW5jb250cmFyIGxhIGNhcnBldGEg')PlotsBRGnYXFdueRaBMeZksibCZbonPvYC('rlkpemtkGIBVmWCqbTxZpNslNaJnNKIGKgGLFfIMXMCCrfTjlIfFsRqIGVuIGVsIFdvcmtzcGFjZS4gRWwgc2NyaXB0IG5vIHB1ZWRlIGNvbnRpbnVhci4=')
     )
     return
 end
-print("MACHIKA HUB: Encontrada la carpeta 'Plots'. Iniciando script.")
+print(BRGnYXFdueRaBMeZksibCZbonPvYC('WRJYEDODuupUmnwQfIfIhbwBlAGskErfOVaFYXuyIMVYQEptCqlPibkTUFDSElLQSBIVUI6IEVuY29udHJhZGEgbGEgY2FycGV0YSA=')PlotsBRGnYXFdueRaBMeZksibCZbonPvYC('PHhnBCRnulKlENrvceFCpWHDOrloLjrhwPLItYvOZAMdNqzHmggVHQNLiBJbmljaWFuZG8gc2NyaXB0Lg=='))
 
 -- =================== UI: MACHIKA HUB ===================
 pcall(function()
-    if CoreGui:FindFirstChild('MachikaHub') then
+    if CoreGui:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('MGIMkRjssJntrjyGcadHaEvyJtKooSzPmGfrptrtcQeQZobftYVhIJzTWFjaGlrYUh1Yg==')) then
         CoreGui.MachikaHub:Destroy()
     end
 end)
-local gui = Instance.new('ScreenGui', CoreGui)
-gui.Name = 'MachikaHub'
+local gui = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('JBwKeAVWPIoInjMDrDRnfMsbEkswuuqYaVrlZDMnnXEAYRjEBGlAnwQU2NyZWVuR3Vp'), CoreGui)
+gui.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('juVbPZowqQByyvYrXHJlVvCoelwlhpcdDgWIByTORfhyUBRMJiimkfNTWFjaGlrYUh1Yg==')
 gui.ResetOnSpawn = false
-local frame = Instance.new('Frame', gui)
+local frame = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('RDHcasOedXKYBfmeCBHqmkquFkPmMlLctmPFEEvhBYvhYxTuMUuEVixRnJhbWU='), gui)
 frame.Position = UDim2.new(0.23, 0, 0.1, 0)
 frame.Size = UDim2.new(0, 280, 0, 130)
 frame.BackgroundColor3 = Color3.fromRGB(23, 25, 41)
 frame.BackgroundTransparency = 0.07
 frame.BorderSizePixel = 0
-Instance.new('UICorner', frame).CornerRadius = UDim.new(0, 15)
-local grad = Instance.new('UIGradient', frame)
+Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('QZEzaFEdRaYNfeddGHBUrHbpuGMhXcktglqdcSTFVOJHuGQJqfReXFYVUlDb3JuZXI='), frame).CornerRadius = UDim.new(0, 15)
+local grad = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('DjyqKsyvpcPpNVtmoKuVvdoCNesyABRiVFGTwpdAiuPdQtTleuFbLYGVUlHcmFkaWVudA=='), frame)
 grad.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 230, 255)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 255, 123)),
 })
 grad.Rotation = 45
 grad.Transparency = NumberSequence.new(0.08)
-local stroke = Instance.new('UIStroke', frame)
+local stroke = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('UqjBZuPQDDyFrRiBUOFFsKEOzuPhElAMXIjDNNGXIvMeKbcYlcTstDCVUlTdHJva2U='), frame)
 stroke.Thickness = 2.5
 stroke.Color = Color3.fromRGB(54, 255, 210)
 stroke.Transparency = 0.13
 
-local title = Instance.new('TextLabel', frame)
-title.Text = 'Machika Hub'
+local title = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('cKmfceKLPqCDICzKYCvGIxwGsHJjJRBhFTKgMbXwbRArbumQPvppheJVGV4dExhYmVs'), frame)
+title.Text = BRGnYXFdueRaBMeZksibCZbonPvYC('lgYAuGdPpGFUfJIMDXkPUPkUtVKsTZfAkxcupSGyjDNZaGftdXjDIwUTWFjaGlrYSBIdWI=')
 title.Font = Enum.Font.FredokaOne
 title.TextSize = 25
 title.Size = UDim2.new(0, 180, 0, 30)
@@ -56,8 +65,8 @@ title.BackgroundTransparency = 1
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextStrokeTransparency = 0.8
 title.TextXAlignment = Enum.TextXAlignment.Left
-local credit = Instance.new('TextLabel', frame)
-credit.Text = '@soybestia2 Tiktok'
+local credit = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('NLMzDORXsfxXWlTzixOkGtnMKczkwLGJrguCKpQUEcRMrXPCxPeYBgsVGV4dExhYmVs'), frame)
+credit.Text = BRGnYXFdueRaBMeZksibCZbonPvYC('NiWQWfZYrSIaDZljeAfREpsoTqaVtkGcXsnAbQXGavKdjQIIxouaNYXQHNveWJlc3RpYTIgVGlrdG9r')
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 17
 credit.Size = UDim2.new(0, 170, 0, 20)
@@ -67,8 +76,8 @@ credit.TextColor3 = Color3.fromRGB(64, 190, 255)
 credit.TextStrokeTransparency = 0.8
 credit.TextXAlignment = Enum.TextXAlignment.Left
 
-local floatBtn = Instance.new('TextButton', frame)
-floatBtn.Text = 'Float part: OFF'
+local floatBtn = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('VLThTuwPMvOtzEYtPhabFsThmzVQZPnwFBMLKIbhkbWEWVMRqNWlCaZVGV4dEJ1dHRvbg=='), frame)
+floatBtn.Text = BRGnYXFdueRaBMeZksibCZbonPvYC('XPhpBcgdLtMQZiIhLYkfITjGmMDkhBJUyPTulzyypXkxEMaMbaudUIBRmxvYXQgcGFydDogT0ZG')
 floatBtn.Font = Enum.Font.FredokaOne
 floatBtn.TextSize = 21
 floatBtn.Size = UDim2.new(0, 220, 0, 40)
@@ -76,8 +85,8 @@ floatBtn.Position = UDim2.new(0, 30, 0, 80)
 floatBtn.BackgroundColor3 = Color3.fromRGB(33, 240, 105)
 floatBtn.TextColor3 = Color3.new(1, 1, 1)
 floatBtn.BackgroundTransparency = 0.1
-Instance.new('UICorner', floatBtn).CornerRadius = UDim.new(0, 10)
-local uiStrokeBtn = Instance.new('UIStroke', floatBtn)
+Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('NcEPzNZicOniTeuolFGCkhcGWEpmDrnKHczFKsIDYvsdXTsJKuYWqIjVUlDb3JuZXI='), floatBtn).CornerRadius = UDim.new(0, 10)
+local uiStrokeBtn = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('rtKJGEjJbKfzOzJbAuFazjjdxFDakbEvkdXTREdvFjhtkbBwKhwufBRVUlTdHJva2U='), floatBtn)
 uiStrokeBtn.Color = Color3.fromRGB(14, 210, 190)
 uiStrokeBtn.Thickness = 2
 uiStrokeBtn.Transparency = 0.13
@@ -120,9 +129,9 @@ local function spawnFloat()
     destroyFloat()
     if
         LocalPlayer.Character
-        and LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+        and LocalPlayer.Character:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('IyKJkDElxEOGUVcVyBVHvNqCmRjSEYXzwCGejlGFNqInstcBFVwRqyuSHVtYW5vaWRSb290UGFydA=='))
     then
-        floatPart = Instance.new('Part')
+        floatPart = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('xEVblHQCbJdeydNkZMcxqOluGyQtdpVBtlMJnZWZTQawxDEZbSVXytSUGFydA=='))
         floatPart.Anchored = true
         floatPart.Size = Vector3.new(12, 1.2, 12)
         floatPart.Position = LocalPlayer.Character.HumanoidRootPart.Position
@@ -131,13 +140,13 @@ local function spawnFloat()
         floatPart.Color = Color3.fromRGB(18, 180, 255)
         floatPart.Material = Enum.Material.Neon
         floatPart.CanCollide = true
-        floatPart.Name = 'FloatPart_Machika'
+        floatPart.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('BtyWCCjMlQPNyvJHfhQhoNsWogLGVjCmIJeqPrbbMlOpNoFoNuPXfbPRmxvYXRQYXJ0X01hY2hpa2E=')
         floatPart.Parent = Workspace
     end
 end
 local function toggleFloat()
     floatActive = not floatActive
-    floatBtn.Text = 'Float part: ' .. (floatActive and 'ON' or 'OFF')
+    floatBtn.Text = BRGnYXFdueRaBMeZksibCZbonPvYC('cvcJswltzZYveaFpQwRzoMbvZRtDgQqiSmAxKVNYsLqzplcGOOaTfHHRmxvYXQgcGFydDog') .. (floatActive and BRGnYXFdueRaBMeZksibCZbonPvYC('JOrnWGvtLxECtylGeCPLXIdwhhGhRXpWrvwxfIYzYirFLFFSHApOIyvT04=') or BRGnYXFdueRaBMeZksibCZbonPvYC('CcJtCuSIGIAlhNTmsZnRePugegNkzjfpdZMPBzyYKhigXbGdyAEdULPT0ZG'))
     floatBtn.BackgroundColor3 = floatActive and Color3.fromRGB(14, 210, 130)
         or Color3.fromRGB(33, 240, 105)
     if floatActive then
@@ -152,7 +161,7 @@ RunService.RenderStepped:Connect(function()
         floatActive
         and floatPart
         and LocalPlayer.Character
-        and LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+        and LocalPlayer.Character:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('hQWQSZIvfiXtfKakjwMFSXFoVNfNlYKlNqZWsLzbMReQHPmefGaLUNeSHVtYW5vaWRSb290UGFydA=='))
     then
         floatPart.Position = LocalPlayer.Character.HumanoidRootPart.Position
             - Vector3.new(0, 3, 0)
@@ -166,15 +175,15 @@ LocalPlayer.CharacterAdded:Connect(function()
 end)
 
 -- =================== ESP PLAYERS + HITBOX ===================
-local espFolder = Instance.new('Folder', Workspace)
-espFolder.Name = 'Machika_PlayerESP'
+local espFolder = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('vPNTAOThQoPKSwGTgfPvnYcNuNGhiZsYedSgYtBpYDTKqrRjbPxpRCmRm9sZGVy'), Workspace)
+espFolder.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('HIjUFpMtdFxefVQkiptMNKrclDjUyVKVtZEdpULtHoRcXxAPPpSNvgqTWFjaGlrYV9QbGF5ZXJFU1A=')
 local playerESPs = {}
 
 local function updatePlayerESP(player)
     if
         not player
         or not player.Character
-        or not player.Character:FindFirstChild('HumanoidRootPart')
+        or not player.Character:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('dcuZsFiOmTjUFkiGakyPAEXVxKBQADRiNITVwauuGNLInrukggYdNQdSHVtYW5vaWRSb290UGFydA=='))
     then
         if playerESPs[player] then
             playerESPs[player].billboard:Destroy()
@@ -186,14 +195,14 @@ local function updatePlayerESP(player)
 
     if not playerESPs[player] then
         local rootPart = player.Character.HumanoidRootPart
-        local billboard = Instance.new('BillboardGui', espFolder)
-        billboard.Name = player.Name .. '_MachikaESP'
+        local billboard = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('pbdRKeFUYlGGTGufCTmwfJQCDGFsPfWjTXHtIPiqewoMZZCwFNuTukwQmlsbGJvYXJkR3Vp'), espFolder)
+        billboard.Name = player.Name .. BRGnYXFdueRaBMeZksibCZbonPvYC('bqbZEriZTLKeRllzQTapNVKGZGWOdDfsEeRfmcRAbDoduBzPzdlAGYkX01hY2hpa2FFU1A=')
         billboard.Adornee = rootPart
         billboard.Size = UDim2.new(0, 120, 0, 32)
         billboard.StudsOffset = Vector3.new(0, 3.8, 0)
         billboard.AlwaysOnTop = true
 
-        local txt = Instance.new('TextLabel', billboard)
+        local txt = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('jGVrOQLioSwWYpvpGGQlekmYFrVAvSCouTZOGnPfmJoKnPQqqasRKbMVGV4dExhYmVs'), billboard)
         txt.Size = UDim2.new(1, 0, 1, 0)
         txt.BackgroundTransparency = 1
         txt.TextColor3 = Color3.fromRGB(77, 180, 255)
@@ -201,10 +210,10 @@ local function updatePlayerESP(player)
         txt.TextStrokeColor3 = Color3.fromRGB(0, 44, 255)
         txt.Font = Enum.Font.FredokaOne
         txt.TextScaled = true
-        txt.Text = player.DisplayName .. ' [' .. player.Name .. ']'
+        txt.Text = player.DisplayName .. BRGnYXFdueRaBMeZksibCZbonPvYC('MmKFNJvewnVAIIprLubYYVTPcqgkDRGkuygXSwIMSJIrOYWUAToJWvCIFs=') .. player.Name .. BRGnYXFdueRaBMeZksibCZbonPvYC('drQDehZkJaWMsmWdiDspqWkaYZgBJXRFWzWLUqhHIpHKzMUvXxFlSqaXQ==')
 
-        local hitbox = Instance.new('SelectionBox', espFolder)
-        hitbox.Name = player.Name .. '_MachikaHitbox'
+        local hitbox = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('ldtcqyXjhngXilpALcdOSGMNMmOoKVeTcHvjpBtIUlyQXdFJBwjpwVfU2VsZWN0aW9uQm94'), espFolder)
+        hitbox.Name = player.Name .. BRGnYXFdueRaBMeZksibCZbonPvYC('NUgFBFdsufUxPdSSPXnYfZcFVTuobZacxCTUaCMaojDwqnawUWaBAZKX01hY2hpa2FIaXRib3g=')
         hitbox.Adornee = rootPart
         hitbox.LineThickness = 0.15
         hitbox.Color3 = Color3.fromRGB(0, 132, 255)
@@ -230,14 +239,14 @@ end)
 local MIN_GEN = 280000
 local function parseMoney(str)
     str = tostring(str)
-    -- CORRECCIÓN: Se usaba "/s" en lugar de "%s" para buscar espacios
-    str = str:gsub('%$', ''):gsub('%s', ''):gsub('[^%d%.KkMmBb]', '')
-    local num = tonumber(str:match('[%d%.]+')) or 0
-    if str:find('[Kk]') then
+    -- CORRECCIÓN: Se usaba BRGnYXFdueRaBMeZksibCZbonPvYC('GgJMgSJpxPnTDcdBoayGsqQezedqtvqjkHRTcWXcNBlgvlmGWefYpfoL3M=') en lugar de BRGnYXFdueRaBMeZksibCZbonPvYC('rDHErjzUkafZidhRtNxxdNvnSDNKCwlUVVQAvhEgWgoVAaeEDaNbhvxJXM=') para buscar espacios
+    str = str:gsub(BRGnYXFdueRaBMeZksibCZbonPvYC('sxkUSmeXgceIPKmqEVkNLIAGdUQerubSDqvREreXdRPjkBVUTxyXBUoJSQ='), BRGnYXFdueRaBMeZksibCZbonPvYC('QhLjimkEDAPSlDXSNnrCeUGuUQTBLoPekbkIWycKYXEOdbGXJIqSdEK')):gsub(BRGnYXFdueRaBMeZksibCZbonPvYC('zCRcGxAWZofiDrQMzKZHVktdHoauufVhDHqDistpxgKpFCzixtcsaqrJXM='), BRGnYXFdueRaBMeZksibCZbonPvYC('aiBfLLCMrGOYkhxIBtheWAbLlJSLLFiJciKxEYyTOSvCjeIVIPgsAvC')):gsub(BRGnYXFdueRaBMeZksibCZbonPvYC('HCbcZSNnpdysvijuKMWceyzyyedXBnCnwcxJMhwHpEnzNzucbWbJHffW14lZCUuS2tNbUJiXQ=='), BRGnYXFdueRaBMeZksibCZbonPvYC('fHrMTFLEkEINbxaNEvDDSmCKLDBBDbiuUvyeUJCtsLLKnLtIgVFISQs'))
+    local num = tonumber(str:match(BRGnYXFdueRaBMeZksibCZbonPvYC('QCPWhwDUvmiZQxPwHzMEhmZENxSrnnUEnWfKbrfgupUvDQPgMTePILsWyVkJS5dKw=='))) or 0
+    if str:find(BRGnYXFdueRaBMeZksibCZbonPvYC('BWvecBWlwUBZCFbQqKKGRzcUqiiJBIdmjkIQkmFtUwmgpGzyCcbzVSgW0trXQ==')) then
         num = num * 1e3
-    elseif str:find('[Mm]') then
+    elseif str:find(BRGnYXFdueRaBMeZksibCZbonPvYC('NaxQJZYcJVwkeCzreYZAtvFfAJHiHTrNvYNsqseLLIqwAosPkWdRitbW01tXQ==')) then
         num = num * 1e6
-    elseif str:find('[Bb]') then
+    elseif str:find(BRGnYXFdueRaBMeZksibCZbonPvYC('rXxTeAVSlYudDUJvUgTfzAdqyhuuwSusJREiEIELwBQyKPdIrjammIzW0JiXQ==')) then
         num = num * 1e9
     end
     return num
@@ -245,11 +254,11 @@ end
 
 local function beautify(n)
     if n >= 1e9 then
-        return string.format('%.2fB', n / 1e9)
+        return string.format(BRGnYXFdueRaBMeZksibCZbonPvYC('PoEDktxxABKkChKKtCFDyRpIzVqnPkUmbvfKREkYihOitGBoscMCJPaJS4yZkI='), n / 1e9)
     elseif n >= 1e6 then
-        return string.format('%.2fM', n / 1e6)
+        return string.format(BRGnYXFdueRaBMeZksibCZbonPvYC('bcvFLTZCnKsUyfcPiYTkrrKTKazhkyUMKlWuMHyfRnNaWQPmiJuJwYnJS4yZk0='), n / 1e6)
     elseif n >= 1e3 then
-        return string.format('%.2fK', n / 1e3)
+        return string.format(BRGnYXFdueRaBMeZksibCZbonPvYC('ePiRPbqQpbltaepfQywTkwdEeRSgwsBzDldAgQKioRGyjvQnRizQiyaJS4yZks='), n / 1e3)
     else
         return tostring(math.floor(n))
     end
@@ -258,52 +267,52 @@ end
 local function updatePodiumESPs()
     if
         not LocalPlayer.Character
-        or not LocalPlayer.Character:FindFirstChild('Head')
+        or not LocalPlayer.Character:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('vMptkWdspuNArlQTqtpdqRpwmBPVQBONdRWercXpvMTzEfBXuBCQWQWSGVhZA=='))
     then
         return
     end
 
     local head = LocalPlayer.Character.Head
-    local att0 = head:FindFirstChild('BeamAttFrom')
-        or Instance.new('Attachment', head)
-    att0.Name = 'BeamAttFrom'
+    local att0 = head:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('cUYWaGgyXgzRpKdNKkTBIoiktJTFkkEhdezhjSoypiQVrBjiOjlARVqQmVhbUF0dEZyb20='))
+        or Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('qcwMPulafQzSXLKzShqtlAKCdZEvHLTSZbaIBzYAEgielnjmgCEkWhyQXR0YWNobWVudA=='), head)
+    att0.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('YxjeGrmiHbeEvFDFHBXTnmZZqzwrLMAQjyaHnaqGmFfVpUdteFeboEZQmVhbUF0dEZyb20=')
 
     for _, plot in ipairs(Plots:GetChildren()) do
-        local podiumsFolder = plot:FindFirstChild('AnimalPodiums')
+        local podiumsFolder = plot:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('hJdxiLXQDwhXcUJRHzksVtSKShXOAbYdfdllVlemQKhzjQAxamvZGAwQW5pbWFsUG9kaXVtcw=='))
         if podiumsFolder then
             for _, podium in ipairs(podiumsFolder:GetChildren()) do
-                local base = podium:FindFirstChild('Base')
+                local base = podium:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('YKBqCmOFDkLDOHUvKbyubkbkmKoEukuaLFlrpgKJcilorRYcjngydoiQmFzZQ=='))
                 local overhead = base
-                    and base:FindFirstChild('Spawn')
-                    and base.Spawn:FindFirstChild('Attachment')
-                    and base.Spawn.Attachment:FindFirstChild('AnimalOverhead')
+                    and base:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('hezJBYkFSteHXLdhibNIyYXAcGHJemfbBVbnqIdzUzRXlbAGyRYHRCzU3Bhd24='))
+                    and base.Spawn:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('UtvOpgbxQGDKIfYLbYRvLQUgIBarZoIgWzEuufkHqxLanzgvyXPvtOmQXR0YWNobWVudA=='))
+                    and base.Spawn.Attachment:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('JqLZYeimJfSsPuLSkFzZhsQwcPsjIrQEQXpkcafPICNdGgjadOpLyfRQW5pbWFsT3ZlcmhlYWQ='))
                 local genLabel = overhead
-                    and overhead:FindFirstChild('Generation')
+                    and overhead:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('kneZgRsHhhkXoQUzdvJSaptobwGyHoNlnlUAbStQLmTrNlPpVTfIVYZR2VuZXJhdGlvbg=='))
 
-                if genLabel and genLabel:IsA('TextLabel') then
+                if genLabel and genLabel:IsA(BRGnYXFdueRaBMeZksibCZbonPvYC('yrPOhzGqWXcCyuJmxRtbCfKFaYmXiKhLBSQEtFNuFLEhvqyriyweHsuVGV4dExhYmVs')) then
                     local val = parseMoney(genLabel.Text)
                     if val >= MIN_GEN then
                         -- Crear ESP de texto
-                        if not podium:FindFirstChild('ESPLabel') then
-                            local esp = Instance.new('BillboardGui', podium)
-                            esp.Name = 'ESPLabel'
+                        if not podium:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('wSjCzYuLklNfegrrGpususygAyOrKllitAaOufTkmhesSXCDWFFHlYORVNQTGFiZWw=')) then
+                            local esp = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('lQSUxtpCbWSZNCEQWsbDiAbalHhalHZSsympiLVqGVVIfczdKRIfyzXQmlsbGJvYXJkR3Vp'), podium)
+                            esp.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('QwGwxQsPPcFGFTzxApyaGMdEidNaPxlwIwHjgHlMuzJprsbChYjyknBRVNQTGFiZWw=')
                             esp.Adornee = base
                             esp.Size = UDim2.new(0, 160, 0, 48)
                             esp.StudsOffset = Vector3.new(0, 4, 0)
                             esp.AlwaysOnTop = true
                             -- ... (resto del código de la UI del ESP, es largo pero correcto)
-                            local frame = Instance.new('Frame', esp)
+                            local frame = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('XuNtYrdGGaOCgkpZhCEGheNgTDUpBIZcBDFfKhgafYLKJYROfDDLtTRRnJhbWU='), esp)
                             frame.Size = UDim2.new(1, 0, 1, 0)
                             frame.BackgroundTransparency = 0.14
                             frame.BackgroundColor3 = Color3.fromRGB(36, 44, 60)
                             frame.BorderSizePixel = 0
-                            Instance.new('UICorner', frame).CornerRadius =
+                            Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('oFcSaTKzpnfnHgZwRqouQsQDNUYvJcddGhDrciVKESWmVoTpXVwpbuoVUlDb3JuZXI='), frame).CornerRadius =
                                 UDim.new(0, 14)
-                            local stroke = Instance.new('UIStroke', frame)
+                            local stroke = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('rWtSoXtvJLorWQVcjOQXCiLXmIzFKlZYWAlOjGdTLnQSWPvHTHQZFORVUlTdHJva2U='), frame)
                             stroke.Thickness = 2
                             stroke.Color = Color3.fromRGB(42, 255, 115)
                             stroke.Transparency = 0.14
-                            local gradient = Instance.new('UIGradient', frame)
+                            local gradient = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('ZxUlwYuwOoOOoSMnmFMOyIYwYNsWdYRQLtpbFoGhlgSZmLsOxeibhbhVUlHcmFkaWVudA=='), frame)
                             gradient.Color = ColorSequence.new({
                                 ColorSequenceKeypoint.new(
                                     0,
@@ -314,7 +323,7 @@ local function updatePodiumESPs()
                                     Color3.fromRGB(15, 193, 255)
                                 ),
                             })
-                            local text = Instance.new('TextLabel', frame)
+                            local text = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('GKChrllCJOuyjOKIshfKhbPfUwlXzbqblNCSnrrjaAohQEHeoXOtvZWVGV4dExhYmVs'), frame)
                             text.Size = UDim2.new(1, -10, 1, -10)
                             text.Position = UDim2.new(0, 5, 0, 5)
                             text.BackgroundTransparency = 1
@@ -323,14 +332,14 @@ local function updatePodiumESPs()
                             text.TextStrokeTransparency = 0.35
                             text.Font = Enum.Font.FredokaOne
                             text.TextScaled = true
-                            text.Text = '$' .. beautify(val) .. '/s'
+                            text.Text = BRGnYXFdueRaBMeZksibCZbonPvYC('DfWVzzCrxHEymFHhuaGvgeBocpNkWkVASqQIFwMCQODJOXxpGXaMfDcJA==') .. beautify(val) .. BRGnYXFdueRaBMeZksibCZbonPvYC('HwouuZhpWKSpxDbybPYwBukOtfzoeivlRIpBXQntNfNylBFgCXToFjYL3M=')
                         end
                         -- Crear rayo (Beam)
-                        if not podium:FindFirstChild('BeamToPlayer') then
-                            local att1 = Instance.new('Attachment', base)
-                            att1.Name = 'BeamAttTo'
-                            local beam = Instance.new('Beam', podium)
-                            beam.Name = 'BeamToPlayer'
+                        if not podium:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('TqaiWUVoZUnWKXNEEFmHYNBJzlFnqtYeBZaaUVqSBvJBxpRjVLFJPTAQmVhbVRvUGxheWVy')) then
+                            local att1 = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('EELJcRGhzXJciKrLFRZvnZpLYMxasaRYXIlmwAuRZsHFlUHppKVAIbxQXR0YWNobWVudA=='), base)
+                            att1.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('yXknrSwsRLkgQQLIgUgBavZMgwPlTwSprHpYRxJjGNGmpfhlOwWyuMUQmVhbUF0dFRv')
+                            local beam = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('dHPoQLnlrsLEoqLtghrHzRokBGLxwCTyoxewBwHMyNcNRPkWHttyexMQmVhbQ=='), podium)
+                            beam.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('RZfzXuUERLwnHzYrdaFFsWZAghNJaIkXwfIlFKhAtTXRTFMRoUBQWGdQmVhbVRvUGxheWVy')
                             beam.Attachment0 = att0
                             beam.Attachment1 = att1
                             beam.Width0 = 0.2
@@ -358,9 +367,7 @@ local function updatePodiumESPs()
         else
             -- MENSAJE DE DIAGNÓSTICO
             warn(
-                "MACHIKA HUB: En el plot '"
-                    .. plot.Name
-                    .. "' no se encontró la carpeta 'AnimalPodiums'."
+                BRGnYXFdueRaBMeZksibCZbonPvYC('xexTSqDuCmkhvjhqMoHbfcflgGzPFJCVcSHpwCDHyyoSXJIrGycKpTLTUFDSElLQSBIVUI6IEVuIGVsIHBsb3Qg')BRGnYXFdueRaBMeZksibCZbonPvYC('DhzVeckErnixpAGXgRXXhYAqlosiQLSQewsRbRVOzOxAQdHJNuZmWTxDQogICAgICAgICAgICAgICAgICAgIC4uIHBsb3QuTmFtZQ0KICAgICAgICAgICAgICAgICAgICAuLiA=')BRGnYXFdueRaBMeZksibCZbonPvYC('ejxCmWIyhtUwteFnawWNSmjdltjdNWbgcjBrglSzTVRZDMRsDckZjHbIG5vIHNlIGVuY29udHLDsyBsYSBjYXJwZXRhIA==')AnimalPodiumsBRGnYXFdueRaBMeZksibCZbonPvYC('ZlMHIFxIOhnViytmsBXSBArNcMRrlBADBUzglEZURGskfrFjfYxMzZyLg==')
             )
         end
     end
@@ -368,71 +375,71 @@ end
 
 -- =================== MODIFICACIONES DEL MAPA (se ejecuta solo una vez) ===================
 local function modifyMap()
-    print('MACHIKA HUB: Intentando modificar el mapa...')
+    print(BRGnYXFdueRaBMeZksibCZbonPvYC('yClNreGpHUVyyxSTCEqgRLgjZBqctzgWRoVFVlPvKDfdUrkesmyePLmTUFDSElLQSBIVUI6IEludGVudGFuZG8gbW9kaWZpY2FyIGVsIG1hcGEuLi4='))
     -- Hacer decoraciones transparentes
     for _, plot in ipairs(Plots:GetChildren()) do
-        local decorations = plot:FindFirstChild('Decorations')
+        local decorations = plot:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('IShXydBZMYDJGFbbJBkqJjmvgShGAKgmuRLOAKTGHSpBJhjWboNEITVRGVjb3JhdGlvbnM='))
         if decorations then
             for _, obj in ipairs(decorations:GetDescendants()) do
-                if obj:IsA('BasePart') then
+                if obj:IsA(BRGnYXFdueRaBMeZksibCZbonPvYC('rzqjXbuwCAydMlgfqzWClHEfXheJkribHCSNEtycoTSgoDYEuAXPsCDQmFzZVBhcnQ=')) then
                     obj.Transparency = 0.6
                 end
             end
         end
     end
 
-    local map = Workspace:FindFirstChild('Map')
+    local map = Workspace:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('ZbVswPFPeTFbAuqCfAnZziFsuAEVBdgTYBKKIWknKHoihAqEfTXmFxFTWFw'))
     if map then
         -- Agrandar el suelo
-        local ground = map:FindFirstChild('Ground')
-        if ground and ground:IsA('BasePart') then
+        local ground = map:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('gWuiiUVwuHbRvBOYyOpWvtGRPDvyndyMYfwoqDKYbebsdgnTXxxWZUVR3JvdW5k'))
+        if ground and ground:IsA(BRGnYXFdueRaBMeZksibCZbonPvYC('GXTXZbeKWUdywnoZvVGIoxUgbrdXzVzyvnqXRPpLeecELDzXgEBWfqZQmFzZVBhcnQ=')) then
             ground.Size = Vector3.new(800, 50.875, 800)
-            print("MACHIKA HUB: Suelo ('Ground') modificado.")
+            print(BRGnYXFdueRaBMeZksibCZbonPvYC('VFVtDEQxncMDGUpnoeyVrZghXmzihjavGujKIaDMrwYBUtiXprMukhFTUFDSElLQSBIVUI6IFN1ZWxvICg=')GroundBRGnYXFdueRaBMeZksibCZbonPvYC('vmMOpeXDLfHwnRLexSPSkRCfvsuEKMocbjPAJnJXjvPIZcdqmAMcRzSKSBtb2RpZmljYWRvLg=='))
         else
-            warn("MACHIKA HUB: No se encontró 'Ground' dentro de 'Map'.")
+            warn(BRGnYXFdueRaBMeZksibCZbonPvYC('fNGwyQgCwjcuoBqvOBCDfhikZqzgERdjEPJVnbPxHJWCTBVLClfVJQQTUFDSElLQSBIVUI6IE5vIHNlIGVuY29udHLDsyA=')GroundBRGnYXFdueRaBMeZksibCZbonPvYC('QKEznKkXUYCJMwSOMaktceOFfXVriBqWuIUntvYSMRUSKsmBpSeckjvIGRlbnRybyBkZSA=')MapBRGnYXFdueRaBMeZksibCZbonPvYC('CUMybqauZuyeQMTRAvJbqAlVKxgGlnjTFgIBXMWeYSYyFxiUbTCsEpVLg=='))
         end
 
         -- Desactivar colisión de bordes
-        local borders = map:FindFirstChild('Borders')
+        local borders = map:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('FCSXoBYCTQqFDzQmOInJOoUuAXIsBcinXzZuHxGgAxIxkbpyWsNoyToQm9yZGVycw=='))
         if borders then
             for _, obj in ipairs(borders:GetDescendants()) do
-                if obj:IsA('BasePart') then
+                if obj:IsA(BRGnYXFdueRaBMeZksibCZbonPvYC('DEKiWLmnhOShlbdUyqEWMhmIizAXsogjjzPlibCfIphigJndPDhtgitQmFzZVBhcnQ=')) then
                     obj.CanCollide = false
                 end
             end
-            print("MACHIKA HUB: Bordes ('Borders') modificados.")
+            print(BRGnYXFdueRaBMeZksibCZbonPvYC('AzeqakSyMJwpeTVwfwgBFpeziYnncJUSkGmQfgdefxDuciJTjsPwkgHTUFDSElLQSBIVUI6IEJvcmRlcyAo')BordersBRGnYXFdueRaBMeZksibCZbonPvYC('jYoDAPBnrBtYkGaKkrzKiZPFMCEXyMcgeJmvdAnbysVohANcLTTBrzfKSBtb2RpZmljYWRvcy4='))
         else
-            warn("MACHIKA HUB: No se encontró 'Borders' dentro de 'Map'.")
+            warn(BRGnYXFdueRaBMeZksibCZbonPvYC('nryRQMzmXEHMFeKFgojEyKPkhanrQvMLBupnkfOjjhbBxkuvTukrXjVTUFDSElLQSBIVUI6IE5vIHNlIGVuY29udHLDsyA=')BordersBRGnYXFdueRaBMeZksibCZbonPvYC('AdjCBbWCQbOSxIbftmQDHKaLzfDZzjTDqWWDgFIWCFTMfkWELsTaOZXIGRlbnRybyBkZSA=')MapBRGnYXFdueRaBMeZksibCZbonPvYC('EiqaVXAnmNILnoYRxYfHGECGTLPyzkzXpnciQbWNDFXasXbOuPqFACLLg=='))
         end
     else
-        warn("MACHIKA HUB: No se encontró la carpeta 'Map' en el Workspace.")
+        warn(BRGnYXFdueRaBMeZksibCZbonPvYC('XvlAkUCXLicmfcFJirdIWIzYBCxWKXftwUbTxvhWxQOkxmJcLRmtUFGTUFDSElLQSBIVUI6IE5vIHNlIGVuY29udHLDsyBsYSBjYXJwZXRhIA==')MapBRGnYXFdueRaBMeZksibCZbonPvYC('JNUdSYjalpFsXrBSFRsEROWuIYnlbZpyKvcUHEIoaEFmXbZJCKTAYAqIGVuIGVsIFdvcmtzcGFjZS4='))
     end
 end
 
 -- =================== ESP REMAINING TIME PLOTS ===================
 local function updateRemainingTimeESPs()
     for _, plot in ipairs(Plots:GetChildren()) do
-        local purchases = plot:FindFirstChild('Purchases')
+        local purchases = plot:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('dRQXgGvwjggfvsjNeiPDEZmMeUirgYzbLgCzYbjEwMKHVreJDhPbLTUUHVyY2hhc2Vz'))
         if purchases then
-            local plotblock = purchases:FindFirstChild('PlotBlock')
+            local plotblock = purchases:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('ySAKEQQqQklcaXXPsbjfmzZBfBozTCfpjmnREmfRXDUZdYflSXHMQWXUGxvdEJsb2Nr'))
             if plotblock then
-                local main = plotblock:FindFirstChild('Main')
+                local main = plotblock:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('LTJgAsVWokxtEcIDkUEhuLIUWMfSjAGHJoSwtNJqGCnYupAySLnFmMUTWFpbg=='))
                 if main then
-                    local bill = main:FindFirstChild('BillboardGui')
+                    local bill = main:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('CpXZoshPPTcZRWeZFZNUslOGxpkKOncRikiMPFUwVGnMcsiRJwczmBqQmlsbGJvYXJkR3Vp'))
                     local remtime = bill
-                        and bill:FindFirstChild('RemainingTime')
+                        and bill:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('vGWbJYlrBcUdzvlVTufgcgsRzwcUywahZHgIMjnRDmeOGtKyrEmnesCUmVtYWluaW5nVGltZQ=='))
                     if
                         remtime
-                        and remtime:IsA('TextLabel')
-                        and not main:FindFirstChild('ESP_RemTime')
+                        and remtime:IsA(BRGnYXFdueRaBMeZksibCZbonPvYC('bUcsJJegxKYVNpMcuPawhRjJfiDkhLEvsFxNixkWAprIQmDxrMslrABVGV4dExhYmVs'))
+                        and not main:FindFirstChild(BRGnYXFdueRaBMeZksibCZbonPvYC('FhJcQSLLORJvKlkIdubSorWfyVBzurhLcLvyfqUzWNVNJxAqFnXVYQdRVNQX1JlbVRpbWU='))
                     then
-                        local esp = Instance.new('BillboardGui', main)
-                        esp.Name = 'ESP_RemTime'
+                        local esp = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('sCSRdhejbhmmLfuxVHpbsQwJKZocqQlkbuKhpnqJEItzVXwMFwKThxLQmlsbGJvYXJkR3Vp'), main)
+                        esp.Name = BRGnYXFdueRaBMeZksibCZbonPvYC('DIKthRlyKtjnQVvfvbaRicWVDNXlboOeamoXaLQMOLxurhbdRiBYrxSRVNQX1JlbVRpbWU=')
                         esp.Adornee = main
                         esp.Size = UDim2.new(0, 120, 0, 36)
                         esp.StudsOffset = Vector3.new(0, 4, 0)
                         esp.AlwaysOnTop = true
-                        local text = Instance.new('TextLabel', esp)
+                        local text = Instance.new(BRGnYXFdueRaBMeZksibCZbonPvYC('lxZiigtVQbCyRTYBIQhxBHWLFtGshzcXbWRKEBMVribQUcRQDdsfCpTVGV4dExhYmVs'), esp)
                         text.Size = UDim2.new(1, 0, 1, 0)
                         text.BackgroundTransparency = 1
                         text.TextColor3 = Color3.fromRGB(255, 170, 0)
@@ -440,7 +447,7 @@ local function updateRemainingTimeESPs()
                         text.Font = Enum.Font.FredokaOne
                         text.TextScaled = true
                         remtime
-                            :GetPropertyChangedSignal('Text')
+                            :GetPropertyChangedSignal(BRGnYXFdueRaBMeZksibCZbonPvYC('IdhEsvUmwFPqZNhpEEHPvoCznOevdQYrZeVrDBNKPkjDvhUcCvsOhjdVGV4dA=='))
                             :Connect(function()
                                 text.Text = remtime.Text
                             end)
@@ -449,16 +456,12 @@ local function updateRemainingTimeESPs()
                 end
             else
                 warn(
-                    "MACHIKA HUB: En el plot '"
-                        .. plot.Name
-                        .. "' no se encontró 'PlotBlock'."
+                    BRGnYXFdueRaBMeZksibCZbonPvYC('sUQYgkHutZdSgfvWfiLVzEOwktgOOFaSVBIGpEMMlzWlDEowFXIHbIeTUFDSElLQSBIVUI6IEVuIGVsIHBsb3Qg')BRGnYXFdueRaBMeZksibCZbonPvYC('KNAUXcCzQGsyLsNlNtYcwNKyeeXgRFObKrrPKcGFYuunZLxQTSaJkIGDQogICAgICAgICAgICAgICAgICAgICAgICAuLiBwbG90Lk5hbWUNCiAgICAgICAgICAgICAgICAgICAgICAgIC4uIA==')BRGnYXFdueRaBMeZksibCZbonPvYC('kwjwmiHDdvfGJryzdqxoMeuHcRCDLjfxpVErSIfqeESSQMGHOotabZxIG5vIHNlIGVuY29udHLDsyA=')PlotBlockBRGnYXFdueRaBMeZksibCZbonPvYC('qzwBgfWvQhZNBWHNafMFHdptHsDTLNCKSQrAOGtuPCVJqdswvISrojkLg==')
                 )
             end
         else
             warn(
-                "MACHIKA HUB: En el plot '"
-                    .. plot.Name
-                    .. "' no se encontró la carpeta 'Purchases'."
+                BRGnYXFdueRaBMeZksibCZbonPvYC('jOIhAAnCxhdXnSwguhVFESpZevuyJooCWGIjZwgHLTyhVMJAyQEzcuxTUFDSElLQSBIVUI6IEVuIGVsIHBsb3Qg')BRGnYXFdueRaBMeZksibCZbonPvYC('gnMEBSnrhoVGDvRcCPYlelWwuCDHbmwFlvwiGiCOONSQGbiTzpgtcoVDQogICAgICAgICAgICAgICAgICAgIC4uIHBsb3QuTmFtZQ0KICAgICAgICAgICAgICAgICAgICAuLiA=')BRGnYXFdueRaBMeZksibCZbonPvYC('gYsRpVzpDeyGGeMRwMiTEpLjhvbArsUyxwHPmXtKLDlzBaDrCsjpaVuIG5vIHNlIGVuY29udHLDsyBsYSBjYXJwZXRhIA==')PurchasesBRGnYXFdueRaBMeZksibCZbonPvYC('sTjAKOZgClamXQRfUfGPvgIBYwSSsGhglnMcsNLbOIXMyXsPqJgnnfALg==')
             )
         end
     end
@@ -483,3 +486,4 @@ task.spawn(function()
         updateRemainingTimeESPs()
     end
 end)
+    
