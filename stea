@@ -1,0 +1,485 @@
+-- MACHIKA HUB V3 - TODO EN UNO (float, ESP players, ESP podios, decor transparency, ground, borders, RemainingTime ESP)
+-- VERSION DE DIAGNÓSTICO: Revisa la consola del desarrollador (F9) para ver los errores.
+
+-- =================== SERVICIOS Y VARIABLES PRINCIPALES ===================
+local CoreGui = game:GetService('CoreGui')
+local Workspace = game:GetService('Workspace')
+local Players = game:GetService('Players')
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService('RunService')
+
+-- Esperar por la carpeta "Plots". Si no aparece en 10 segundos, el script se detendrá y te avisará.
+local Plots = Workspace:WaitForChild('Plots', 10)
+if not Plots then
+    warn(
+        "MACHIKA HUB: No se pudo encontrar la carpeta 'Plots' en el Workspace. El script no puede continuar."
+    )
+    return
+end
+print("MACHIKA HUB: Encontrada la carpeta 'Plots'. Iniciando script.")
+
+-- =================== UI: MACHIKA HUB ===================
+pcall(function()
+    if CoreGui:FindFirstChild('MachikaHub') then
+        CoreGui.MachikaHub:Destroy()
+    end
+end)
+local gui = Instance.new('ScreenGui', CoreGui)
+gui.Name = 'MachikaHub'
+gui.ResetOnSpawn = false
+local frame = Instance.new('Frame', gui)
+frame.Position = UDim2.new(0.23, 0, 0.1, 0)
+frame.Size = UDim2.new(0, 280, 0, 130)
+frame.BackgroundColor3 = Color3.fromRGB(23, 25, 41)
+frame.BackgroundTransparency = 0.07
+frame.BorderSizePixel = 0
+Instance.new('UICorner', frame).CornerRadius = UDim.new(0, 15)
+local grad = Instance.new('UIGradient', frame)
+grad.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 230, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 255, 123)),
+})
+grad.Rotation = 45
+grad.Transparency = NumberSequence.new(0.08)
+local stroke = Instance.new('UIStroke', frame)
+stroke.Thickness = 2.5
+stroke.Color = Color3.fromRGB(54, 255, 210)
+stroke.Transparency = 0.13
+
+local title = Instance.new('TextLabel', frame)
+title.Text = 'Machika Hub'
+title.Font = Enum.Font.FredokaOne
+title.TextSize = 25
+title.Size = UDim2.new(0, 180, 0, 30)
+title.Position = UDim2.new(0, 13, 0, 7)
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextStrokeTransparency = 0.8
+title.TextXAlignment = Enum.TextXAlignment.Left
+local credit = Instance.new('TextLabel', frame)
+credit.Text = '@soybestia2 Tiktok'
+credit.Font = Enum.Font.FredokaOne
+credit.TextSize = 17
+credit.Size = UDim2.new(0, 170, 0, 20)
+credit.Position = UDim2.new(0, 100, 0, 35)
+credit.BackgroundTransparency = 1
+credit.TextColor3 = Color3.fromRGB(64, 190, 255)
+credit.TextStrokeTransparency = 0.8
+credit.TextXAlignment = Enum.TextXAlignment.Left
+
+local floatBtn = Instance.new('TextButton', frame)
+floatBtn.Text = 'Float part: OFF'
+floatBtn.Font = Enum.Font.FredokaOne
+floatBtn.TextSize = 21
+floatBtn.Size = UDim2.new(0, 220, 0, 40)
+floatBtn.Position = UDim2.new(0, 30, 0, 80)
+floatBtn.BackgroundColor3 = Color3.fromRGB(33, 240, 105)
+floatBtn.TextColor3 = Color3.new(1, 1, 1)
+floatBtn.BackgroundTransparency = 0.1
+Instance.new('UICorner', floatBtn).CornerRadius = UDim.new(0, 10)
+local uiStrokeBtn = Instance.new('UIStroke', floatBtn)
+uiStrokeBtn.Color = Color3.fromRGB(14, 210, 190)
+uiStrokeBtn.Thickness = 2
+uiStrokeBtn.Transparency = 0.13
+
+-- DRAG MENU
+local dragging, dragStart, startPos
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+frame.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- =================== FLOAT PART ===================
+local floatPart, floatActive = nil, false
+local function destroyFloat()
+    if floatPart then
+        floatPart:Destroy()
+        floatPart = nil
+    end
+end
+local function spawnFloat()
+    destroyFloat()
+    if
+        LocalPlayer.Character
+        and LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+    then
+        floatPart = Instance.new('Part')
+        floatPart.Anchored = true
+        floatPart.Size = Vector3.new(12, 1.2, 12)
+        floatPart.Position = LocalPlayer.Character.HumanoidRootPart.Position
+            - Vector3.new(0, 3, 0)
+        floatPart.Transparency = 0.3
+        floatPart.Color = Color3.fromRGB(18, 180, 255)
+        floatPart.Material = Enum.Material.Neon
+        floatPart.CanCollide = true
+        floatPart.Name = 'FloatPart_Machika'
+        floatPart.Parent = Workspace
+    end
+end
+local function toggleFloat()
+    floatActive = not floatActive
+    floatBtn.Text = 'Float part: ' .. (floatActive and 'ON' or 'OFF')
+    floatBtn.BackgroundColor3 = floatActive and Color3.fromRGB(14, 210, 130)
+        or Color3.fromRGB(33, 240, 105)
+    if floatActive then
+        spawnFloat()
+    else
+        destroyFloat()
+    end
+end
+floatBtn.MouseButton1Click:Connect(toggleFloat)
+RunService.RenderStepped:Connect(function()
+    if
+        floatActive
+        and floatPart
+        and LocalPlayer.Character
+        and LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+    then
+        floatPart.Position = LocalPlayer.Character.HumanoidRootPart.Position
+            - Vector3.new(0, 3, 0)
+    end
+end)
+LocalPlayer.CharacterAdded:Connect(function()
+    if floatActive then
+        task.wait(1)
+        spawnFloat()
+    end
+end)
+
+-- =================== ESP PLAYERS + HITBOX ===================
+local espFolder = Instance.new('Folder', Workspace)
+espFolder.Name = 'Machika_PlayerESP'
+local playerESPs = {}
+
+local function updatePlayerESP(player)
+    if
+        not player
+        or not player.Character
+        or not player.Character:FindFirstChild('HumanoidRootPart')
+    then
+        if playerESPs[player] then
+            playerESPs[player].billboard:Destroy()
+            playerESPs[player].hitbox:Destroy()
+            playerESPs[player] = nil
+        end
+        return
+    end
+
+    if not playerESPs[player] then
+        local rootPart = player.Character.HumanoidRootPart
+        local billboard = Instance.new('BillboardGui', espFolder)
+        billboard.Name = player.Name .. '_MachikaESP'
+        billboard.Adornee = rootPart
+        billboard.Size = UDim2.new(0, 120, 0, 32)
+        billboard.StudsOffset = Vector3.new(0, 3.8, 0)
+        billboard.AlwaysOnTop = true
+
+        local txt = Instance.new('TextLabel', billboard)
+        txt.Size = UDim2.new(1, 0, 1, 0)
+        txt.BackgroundTransparency = 1
+        txt.TextColor3 = Color3.fromRGB(77, 180, 255)
+        txt.TextStrokeTransparency = 0.28
+        txt.TextStrokeColor3 = Color3.fromRGB(0, 44, 255)
+        txt.Font = Enum.Font.FredokaOne
+        txt.TextScaled = true
+        txt.Text = player.DisplayName .. ' [' .. player.Name .. ']'
+
+        local hitbox = Instance.new('SelectionBox', espFolder)
+        hitbox.Name = player.Name .. '_MachikaHitbox'
+        hitbox.Adornee = rootPart
+        hitbox.LineThickness = 0.15
+        hitbox.Color3 = Color3.fromRGB(0, 132, 255)
+        hitbox.SurfaceTransparency = 0.6
+
+        playerESPs[player] = { billboard = billboard, hitbox = hitbox }
+    else
+        -- Asegurarse de que el Adornee sigue siendo correcto (por si el personaje reaparece)
+        playerESPs[player].billboard.Adornee = player.Character.HumanoidRootPart
+        playerESPs[player].hitbox.Adornee = player.Character.HumanoidRootPart
+    end
+end
+
+Players.PlayerRemoving:Connect(function(player)
+    if playerESPs[player] then
+        playerESPs[player].billboard:Destroy()
+        playerESPs[player].hitbox:Destroy()
+        playerESPs[player] = nil
+    end
+end)
+
+-- =================== ESP PODIOS, DECOR, GROUND, BORDERS ===================
+local MIN_GEN = 280000
+local function parseMoney(str)
+    str = tostring(str)
+    -- CORRECCIÓN: Se usaba "/s" en lugar de "%s" para buscar espacios
+    str = str:gsub('%$', ''):gsub('%s', ''):gsub('[^%d%.KkMmBb]', '')
+    local num = tonumber(str:match('[%d%.]+')) or 0
+    if str:find('[Kk]') then
+        num = num * 1e3
+    elseif str:find('[Mm]') then
+        num = num * 1e6
+    elseif str:find('[Bb]') then
+        num = num * 1e9
+    end
+    return num
+end
+
+local function beautify(n)
+    if n >= 1e9 then
+        return string.format('%.2fB', n / 1e9)
+    elseif n >= 1e6 then
+        return string.format('%.2fM', n / 1e6)
+    elseif n >= 1e3 then
+        return string.format('%.2fK', n / 1e3)
+    else
+        return tostring(math.floor(n))
+    end
+end
+
+local function updatePodiumESPs()
+    if
+        not LocalPlayer.Character
+        or not LocalPlayer.Character:FindFirstChild('Head')
+    then
+        return
+    end
+
+    local head = LocalPlayer.Character.Head
+    local att0 = head:FindFirstChild('BeamAttFrom')
+        or Instance.new('Attachment', head)
+    att0.Name = 'BeamAttFrom'
+
+    for _, plot in ipairs(Plots:GetChildren()) do
+        local podiumsFolder = plot:FindFirstChild('AnimalPodiums')
+        if podiumsFolder then
+            for _, podium in ipairs(podiumsFolder:GetChildren()) do
+                local base = podium:FindFirstChild('Base')
+                local overhead = base
+                    and base:FindFirstChild('Spawn')
+                    and base.Spawn:FindFirstChild('Attachment')
+                    and base.Spawn.Attachment:FindFirstChild('AnimalOverhead')
+                local genLabel = overhead
+                    and overhead:FindFirstChild('Generation')
+
+                if genLabel and genLabel:IsA('TextLabel') then
+                    local val = parseMoney(genLabel.Text)
+                    if val >= MIN_GEN then
+                        -- Crear ESP de texto
+                        if not podium:FindFirstChild('ESPLabel') then
+                            local esp = Instance.new('BillboardGui', podium)
+                            esp.Name = 'ESPLabel'
+                            esp.Adornee = base
+                            esp.Size = UDim2.new(0, 160, 0, 48)
+                            esp.StudsOffset = Vector3.new(0, 4, 0)
+                            esp.AlwaysOnTop = true
+                            -- ... (resto del código de la UI del ESP, es largo pero correcto)
+                            local frame = Instance.new('Frame', esp)
+                            frame.Size = UDim2.new(1, 0, 1, 0)
+                            frame.BackgroundTransparency = 0.14
+                            frame.BackgroundColor3 = Color3.fromRGB(36, 44, 60)
+                            frame.BorderSizePixel = 0
+                            Instance.new('UICorner', frame).CornerRadius =
+                                UDim.new(0, 14)
+                            local stroke = Instance.new('UIStroke', frame)
+                            stroke.Thickness = 2
+                            stroke.Color = Color3.fromRGB(42, 255, 115)
+                            stroke.Transparency = 0.14
+                            local gradient = Instance.new('UIGradient', frame)
+                            gradient.Color = ColorSequence.new({
+                                ColorSequenceKeypoint.new(
+                                    0,
+                                    Color3.fromRGB(40, 255, 123)
+                                ),
+                                ColorSequenceKeypoint.new(
+                                    1,
+                                    Color3.fromRGB(15, 193, 255)
+                                ),
+                            })
+                            local text = Instance.new('TextLabel', frame)
+                            text.Size = UDim2.new(1, -10, 1, -10)
+                            text.Position = UDim2.new(0, 5, 0, 5)
+                            text.BackgroundTransparency = 1
+                            text.TextColor3 = Color3.fromRGB(255, 255, 255)
+                            text.TextStrokeColor3 = Color3.fromRGB(8, 40, 12)
+                            text.TextStrokeTransparency = 0.35
+                            text.Font = Enum.Font.FredokaOne
+                            text.TextScaled = true
+                            text.Text = '$' .. beautify(val) .. '/s'
+                        end
+                        -- Crear rayo (Beam)
+                        if not podium:FindFirstChild('BeamToPlayer') then
+                            local att1 = Instance.new('Attachment', base)
+                            att1.Name = 'BeamAttTo'
+                            local beam = Instance.new('Beam', podium)
+                            beam.Name = 'BeamToPlayer'
+                            beam.Attachment0 = att0
+                            beam.Attachment1 = att1
+                            beam.Width0 = 0.2
+                            beam.Width1 = 0.15
+                            beam.Color = ColorSequence.new({
+                                ColorSequenceKeypoint.new(
+                                    0,
+                                    Color3.fromRGB(20, 255, 90)
+                                ),
+                                ColorSequenceKeypoint.new(
+                                    1,
+                                    Color3.fromRGB(12, 185, 240)
+                                ),
+                            })
+                            beam.LightInfluence = 0
+                            beam.FaceCamera = true
+                            beam.Transparency = NumberSequence.new({
+                                NumberSequenceKeypoint.new(0, 0.03),
+                                NumberSequenceKeypoint.new(1, 0.16),
+                            })
+                        end
+                    end
+                end
+            end
+        else
+            -- MENSAJE DE DIAGNÓSTICO
+            warn(
+                "MACHIKA HUB: En el plot '"
+                    .. plot.Name
+                    .. "' no se encontró la carpeta 'AnimalPodiums'."
+            )
+        end
+    end
+end
+
+-- =================== MODIFICACIONES DEL MAPA (se ejecuta solo una vez) ===================
+local function modifyMap()
+    print('MACHIKA HUB: Intentando modificar el mapa...')
+    -- Hacer decoraciones transparentes
+    for _, plot in ipairs(Plots:GetChildren()) do
+        local decorations = plot:FindFirstChild('Decorations')
+        if decorations then
+            for _, obj in ipairs(decorations:GetDescendants()) do
+                if obj:IsA('BasePart') then
+                    obj.Transparency = 0.6
+                end
+            end
+        end
+    end
+
+    local map = Workspace:FindFirstChild('Map')
+    if map then
+        -- Agrandar el suelo
+        local ground = map:FindFirstChild('Ground')
+        if ground and ground:IsA('BasePart') then
+            ground.Size = Vector3.new(800, 50.875, 800)
+            print("MACHIKA HUB: Suelo ('Ground') modificado.")
+        else
+            warn("MACHIKA HUB: No se encontró 'Ground' dentro de 'Map'.")
+        end
+
+        -- Desactivar colisión de bordes
+        local borders = map:FindFirstChild('Borders')
+        if borders then
+            for _, obj in ipairs(borders:GetDescendants()) do
+                if obj:IsA('BasePart') then
+                    obj.CanCollide = false
+                end
+            end
+            print("MACHIKA HUB: Bordes ('Borders') modificados.")
+        else
+            warn("MACHIKA HUB: No se encontró 'Borders' dentro de 'Map'.")
+        end
+    else
+        warn("MACHIKA HUB: No se encontró la carpeta 'Map' en el Workspace.")
+    end
+end
+
+-- =================== ESP REMAINING TIME PLOTS ===================
+local function updateRemainingTimeESPs()
+    for _, plot in ipairs(Plots:GetChildren()) do
+        local purchases = plot:FindFirstChild('Purchases')
+        if purchases then
+            local plotblock = purchases:FindFirstChild('PlotBlock')
+            if plotblock then
+                local main = plotblock:FindFirstChild('Main')
+                if main then
+                    local bill = main:FindFirstChild('BillboardGui')
+                    local remtime = bill
+                        and bill:FindFirstChild('RemainingTime')
+                    if
+                        remtime
+                        and remtime:IsA('TextLabel')
+                        and not main:FindFirstChild('ESP_RemTime')
+                    then
+                        local esp = Instance.new('BillboardGui', main)
+                        esp.Name = 'ESP_RemTime'
+                        esp.Adornee = main
+                        esp.Size = UDim2.new(0, 120, 0, 36)
+                        esp.StudsOffset = Vector3.new(0, 4, 0)
+                        esp.AlwaysOnTop = true
+                        local text = Instance.new('TextLabel', esp)
+                        text.Size = UDim2.new(1, 0, 1, 0)
+                        text.BackgroundTransparency = 1
+                        text.TextColor3 = Color3.fromRGB(255, 170, 0)
+                        text.TextStrokeTransparency = 0.25
+                        text.Font = Enum.Font.FredokaOne
+                        text.TextScaled = true
+                        remtime
+                            :GetPropertyChangedSignal('Text')
+                            :Connect(function()
+                                text.Text = remtime.Text
+                            end)
+                        text.Text = remtime.Text -- Establecer el texto inicial
+                    end
+                end
+            else
+                warn(
+                    "MACHIKA HUB: En el plot '"
+                        .. plot.Name
+                        .. "' no se encontró 'PlotBlock'."
+                )
+            end
+        else
+            warn(
+                "MACHIKA HUB: En el plot '"
+                    .. plot.Name
+                    .. "' no se encontró la carpeta 'Purchases'."
+            )
+        end
+    end
+end
+
+-- =================== BUCLE PRINCIPAL ===================
+modifyMap() -- Modificar el mapa una sola vez al inicio
+
+RunService.Heartbeat:Connect(function()
+    -- Actualizar ESP de jugadores (esto es rápido y debe hacerse con frecuencia)
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer then
+            updatePlayerESP(player)
+        end
+    end
+end)
+
+-- Bucle más lento para cosas que no cambian tan a menudo
+task.spawn(function()
+    while task.wait(2) do -- Revisar cada 2 segundos es suficiente
+        updatePodiumESPs()
+        updateRemainingTimeESPs()
+    end
+end)
